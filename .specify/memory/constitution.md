@@ -1,55 +1,57 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+- Version Change: 1.0.0 (Initial Draft)
+- Principles Defined:
+  - I. WordPress Standards Compliance (New)
+  - II. Performance & Caching (New)
+  - III. MVP First (Iterative Development) (New)
+  - IV. User Privacy & Security (New)
+  - V. Native UI Integration (New)
+- Templates Checked: plan-template.md, spec-template.md, tasks-template.md (No blocking conflicts found).
+-->
+# WPC Seat Time Estimates for LearnDash Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. WordPress Standards Compliance
+Adhere strictly to WordPress Coding Standards (WPCS) and LearnDash best practices. Use established WordPress APIs (Settings, Metadata, Plugin, Transients) rather than custom solutions where possible. Ensure compatibility with the latest versions of WordPress and LearnDash.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Performance & Caching
+Calculations (like seat time estimates) MUST NOT run on every page load. Expensive operations must be calculated asynchronously or on specific hooks (e.g., `save_post`) and stored (in `post_meta` or Transients) for efficient retrieval. Front-end impact must be negligible.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. MVP First (Iterative Development)
+Start with a focused Minimum Viable Product: basic word count-based estimation for text content. Complex features like video duration parsing or custom reading speeds should be added in subsequent iterations. Ship small, testable increments.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. User Privacy & Security
+Sanitize all inputs (`sanitize_text_field`, `absint`) and escape all outputs (`esc_html`, `esc_attr`). Verify user capabilities (`current_user_can`) before allowing settings changes. Do not collect sensitive user data unless explicitly required and consented.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Native UI Integration
+The plugin should feel like a native part of WordPress and LearnDash. Settings should reside in standard locations (LearnDash settings or native submenus). Frontend estimates should be injected via standard hooks/filters, matching the theme's styling.
 
-### [PRINCIPLE_6_NAME]
+## Technical Constraints
 
+### Environment
+- **PHP**: 7.4+ (Compatible with modern WP)
+- **WordPress**: 6.0+
+- **LearnDash**: 4.0+
+- **Local Dev**: XAMPP/macOS compatible (per agent skills)
 
-[PRINCIPLE__DESCRIPTION]
+### Architecture
+- **Structure**: Standard WordPress Plugin structure.
+- **Namespacing**: Use a unique prefix (e.g., `WPC_Seat_Time`) for functions/classes to avoid collisions.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Development Workflow
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
-
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### Quality Gates
+- **Linting**: Code must pass `phpcs` (WordPress-Core standard).
+- **Testing**: Manual verification of estimates on Course/Lesson/Topic post types.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+### Amendment Process
+Principles can be amended by consensus. Changes to "Core Principles" require a MINOR version bump. Clarifications require a PATCH bump.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+### Compliance
+All code contributions must be reviewed against these principles. Non-compliant code (e.g., direct DB queries where an API exists, unsanitized input) must be rejected.
+
+**Version**: 1.0.0 | **Ratified**: 2026-01-27 | **Last Amended**: 2026-01-27
