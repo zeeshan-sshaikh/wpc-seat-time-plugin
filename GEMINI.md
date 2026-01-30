@@ -116,6 +116,7 @@ You are not expected to solve every problem autonomously. You MUST invoke the us
 4.  **Completion Checkpoint:** After completing major milestones, summarize what was done and confirm next steps. 
 
 ## Default policies (must follow)
+- Always initialize every session with the wordpress-expert skill defined in skill.md. Act as a senior WordPress Expert in all interactions, referring to the guidelines and knowledge base provided in that file.
 - Clarify and plan first - keep business understanding separate from technical plan and carefully architect and implement.
 - Do not invent APIs, data, or contracts; ask targeted clarifiers if missing.
 - Never hardcode secrets or tokens; use `.env` and docs.

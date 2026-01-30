@@ -1,0 +1,17 @@
+# PHP
+vendor/
+*.log
+*.cache
+*.env
+
+# WordPress
+wp-content/uploads/
+wp-config.php
+
+# Universal
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+.vscode/
+.idea/
